@@ -1,0 +1,2239 @@
+/* ============================================================ */
+/* style.css — Dante's Divine Comedy                            */
+/* ============================================================ */
+
+/* ============================================================ */
+/* Global Reset & Base Styles                                   */
+/* ============================================================ */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    animation: page-fade-in 0.5s ease both;
+}
+
+@keyframes page-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+img {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ============================================================ */
+/* Fonts                                                        */
+/* ============================================================ */
+
+@font-face {
+    font-family: 'Gothic Bozo';
+    src: url('../fonts/gothic-bozo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Karolus';
+    src: url('../fonts/karolus.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ============================================================ */
+/* Design Tokens                                                */
+/* ============================================================ */
+
+:root {
+    /* Backgrounds */
+    --clr-parchment:    rgba(247, 235, 220, 0.96);
+    --clr-parchment-s:  #f7ebdc;
+    --clr-crimson:      #561514;   /* deep red — history title */
+
+    /* Text */
+    --clr-title:        #161313;
+    --clr-text-dark:    #241111;
+    --clr-text-light:   rgba(247, 235, 220, 0.96);
+
+    /* Typography */
+    --font-gothic:  'Gothic Bozo', 'UnifrakturMaguntia', cursive;
+    --font-karolus: 'Karolus', cursive;
+    --font-body:    'IM Fell DW Pica', serif;
+    --font-body-sc: 'IM Fell DW Pica SC', serif;
+    --font-eng:     'IM Fell English', serif;
+}
+
+/* ============================================================ */
+/* Background Texture (shared, fixed behind everything)         */
+/* ============================================================ */
+
+/* Applied via .texture-light and .texture-dark on the <body>   */
+
+.texture-light::before,
+.texture-dark::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('../img/bg-texture.png') center / cover no-repeat;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.texture-light {
+    background-color: var(--clr-parchment);
+}
+
+.texture-light::before {
+    opacity: 0.55;
+}
+
+.texture-dark::before {
+    opacity: 0.06;
+}
+
+/* ============================================================ */
+/* Navigation                                                   */
+/* ============================================================ */
+
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 96px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(247, 235, 220, 0.56);
+    overflow: hidden;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: auto;
+    transition: opacity 0.4s ease;
+}
+
+.nav:hover {
+    opacity: 1;
+}
+
+/* -------- Logo -------- */
+
+.nav-logo {
+    position: absolute;
+    left: 71px;
+    top: 30px;
+    width: 280px;
+    height: 36px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+/* -------- Links grid -------- */
+
+.nav-links {
+    position: absolute;
+    right: 62px;
+    top: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, 155px);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px 0;
+    width: 465px;
+    height: 68px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    text-align: center;
+    color: var(--clr-text-dark);
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 30px;
+    transition: opacity 0.2s;
+}
+
+.nav-links a:hover {
+    opacity: 0.65;
+}
+
+/* ============================================================ */
+/* Star icon — top-left home link                               */
+/* ============================================================ */
+
+.star-home {
+    position: fixed;
+    top: 60px;
+    left: 41px;
+    width: 29px;
+    height: 29px;
+    z-index: 50;
+    display: block;
+    transition: opacity 0.2s;
+}
+
+.star-home:hover {
+    opacity: 0.65;
+}
+
+/* ============================================================ */
+/* Home Splash — dark title card (first viewport)               */
+/* ============================================================ */
+
+.home-splash {
+    position: relative;
+    width: 100%;
+    height: 200vh; /* extra room so dante outlives the title */
+    background: #331715;
+    z-index: 200;
+}
+
+/* Background — behind everything, covers the full 200vh section */
+.home-splash-bg {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: saturation;
+    opacity: 0.76;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.home-splash-bg img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+}
+
+/* Dante — sticky: pins to viewport top while page scrolls through 200vh */
+.home-splash-dante {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    mix-blend-mode: saturation;
+    opacity: 0.51;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.home-splash-dante img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* Foreground — absolute, only occupies first 100vh, scrolls away */
+.home-splash-foreground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.home-splash-title {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    mix-blend-mode: lighten;
+    color: #c93030;
+    opacity: 0.55;
+    font-family: var(--font-gothic);
+    line-height: 0.60;
+    text-align: center;
+    pointer-events: none;
+}
+
+.home-splash-divine,
+.home-splash-comedy {
+    display: block;
+    font-size: clamp(80px, 34.7vw, 500px);
+    letter-spacing: -0.07em;
+    white-space: nowrap;
+}
+
+/* ============================================================ */
+/* Home Page                                                    */
+/* ============================================================ */
+
+.home {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: white;
+    z-index: 1;
+}
+
+.home-divine-scroll {
+    position: relative;
+    z-index: 20;
+    background: rgba(247, 235, 210, 0.35);
+    backdrop-filter: blur(10px) saturate(1.2);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+}
+
+.home-divine-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 120px 40px 140px;
+    text-align: center;
+}
+
+/* -------- Parchment bg behind illustration -------- */
+
+.home-parchment {
+    position: absolute;
+    inset: 0;
+    background-color: var(--clr-parchment);
+    z-index: 0;
+}
+
+/* -------- Rotated parchment texture -------- */
+
+.home-texture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/bg-texture.png') center / cover no-repeat;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes texture-drift {
+    from { transform: rotate(90deg); }
+    to   { transform: rotate(450.07deg); }
+}
+
+/* -------- Stars overlay — left instance -------- */
+
+.home-stars {
+    position: absolute;
+    left: -43px;
+    top: -91px;
+    width: 906px;
+    height: 679px;
+    opacity: 0.09;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 1;
+    animation: stars-drift 90s ease-in-out infinite alternate;
+}
+
+@keyframes stars-drift {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to   { transform: translate(18px, -14px) rotate(3deg); }
+}
+
+/* -------- Stars overlay — right instance, rotated -------- */
+
+.home-stars-right {
+    position: absolute;
+    left: 576px;
+    top: -129px;
+    width: 906px;
+    height: 679px;
+    opacity: 0.09;
+    transform: rotate(-173deg);
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 1;
+    animation: stars-drift-right 110s ease-in-out infinite alternate;
+}
+
+@keyframes stars-drift-right {
+    from { transform: rotate(-173deg) translate(0, 0); }
+    to   { transform: rotate(-170deg) translate(-12px, 16px); }
+}
+
+/* -------- Illustration group — plus-darker blend against parchment -------- */
+
+.home-illus-group {
+    position: absolute;
+    width: 1440px;
+    height: 1080px;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%) scale(var(--home-scale, 1));
+    transform-origin: center center;
+    mix-blend-mode: darken;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* -------- Overlay — same fixed 1440x1080 frame, scaled in lock-step, no blend mode -------- */
+/* All interactive + decoration elements live here so they stay pixel-aligned with the   */
+/* illustration at any viewport size (see --home-scale, set in js/main.js).              */
+
+.home-overlay {
+    position: absolute;
+    width: 1440px;
+    height: 1080px;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%) scale(var(--home-scale, 1));
+    transform-origin: center center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* -------- Ground plane -------- */
+
+.home-ground {
+    position: absolute;
+    left: 0;
+    bottom: -60px;
+    width: 1487px;
+    height: 625px;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* -------- Inferno composition (left) -------- */
+
+.home-inferno {
+    position: absolute;
+    left: 0;
+    top: 218px;
+    width: 646px;
+    height: 806px;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.home-inferno > img,
+.home-inferno > div {
+    position: absolute;
+    display: block;
+}
+
+/* inferno bg — extends slightly outside container, clipped by overflow:hidden */
+.i-bg {
+    left: -4.49%;
+    top: 0;
+    width: 106.5%;
+    height: 100.4%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* ground shadow — anchored below-left of container center */
+.i-shadow {
+    left: -5.73%;
+    top: 35.36%;
+    width: 39.32%;
+    height: 67.25%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* rocks lineart — same size/position as i-bg */
+.i-rocks {
+    left: -4.8%;
+    top: 0;
+    width: 107.1%;
+    height: 100.5%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* rocks detail — overflow wrapper: inner image is 171% wide (left side visible) */
+.i-details-wrap {
+    left: -4.33%;
+    top: 1.61%;
+    width: 108.67%;
+    height: 98.63%;
+    overflow: hidden;
+    mix-blend-mode: darken;
+    pointer-events: none;
+}
+
+.i-details {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    width: 171.37%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* rocks colour overlay */
+.i-overlay {
+    left: 32.35%;
+    top: 30.02%;
+    width: 72.76%;
+    height: 69.98%;
+    object-fit: cover;
+    mix-blend-mode: darken;
+    pointer-events: none;
+}
+
+/* demons background */
+.i-demons-bg {
+    left: -4.02%;
+    top: 17.74%;
+    width: 82.82%;
+    height: 82.26%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* demons outline (same position) */
+.i-demons-outline {
+    left: -4.02%;
+    top: 17.74%;
+    width: 82.82%;
+    height: 82.26%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* wall overlay — overflow wrapper: inner image shifted up 9.28% */
+.i-wall-wrap {
+    left: 20.59%;
+    top: 7.94%;
+    width: 47.83%;
+    height: 87.09%;
+    overflow: hidden;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+.i-wall {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: -9.28%;
+    width: 100%;
+    height: 109.31%;
+    max-width: none;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* -------- Purgatorio composition (center-back) -------- */
+
+.home-purgatorio {
+    position: absolute;
+    left: 298px;
+    top: 90px;
+    width: 522px;
+    height: 663px;
+    z-index: 4;
+    overflow: hidden;
+}
+
+.home-purgatorio > img,
+.home-purgatorio > div {
+    position: absolute;
+    display: block;
+}
+
+/* background lineart — fills almost the full container */
+.p-lineart1 {
+    left: 0;
+    top: 2.17%;
+    width: 100%;
+    height: 97.81%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* oberlay — overflow wrapper: inner image offset up and left */
+.p-oberlay-wrap {
+    left: -3.45%;
+    top: -3.92%;
+    width: 104.79%;
+    height: 103.92%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.p-oberlay {
+    position: absolute;
+    display: block;
+    left: -25.82%;
+    top: -18.98%;
+    width: 125.82%;
+    height: 162.4%;
+    max-width: none;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* foreground lineart — overflow wrapper: inner image is 130% wide (left portion visible) */
+.p-lineart2-wrap {
+    left: 1.72%;
+    top: 10.56%;
+    width: 114.56%;
+    height: 87.78%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.p-lineart2 {
+    position: absolute;
+    display: block;
+    left: -0.02%;
+    top: 0;
+    width: 129.83%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* background figures */
+.p-people {
+    left: 14.94%;
+    top: 4.68%;
+    width: 79.5%;
+    height: 77.37%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* figure detail overlay (same position) */
+.p-details {
+    left: 14.37%;
+    top: 4.68%;
+    width: 80.08%;
+    height: 77.98%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* Adam & Eve tiny figures at top */
+.p-adao {
+    left: 39.27%;
+    top: 0;
+    width: 30.84%;
+    height: 16.59%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* -------- Grass -------- */
+
+.home-relva {
+    position: absolute;
+    left: 344px;
+    top: 324px;
+    width: 407px;
+    height: 647px;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* -------- Dante figure -------- */
+
+.home-dante {
+    position: absolute;
+    left: 528px;
+    top: 219px;
+    width: 451px;
+    height: 851px;
+    z-index: 7;
+}
+
+.home-dante > img {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+}
+
+/* dante bg */
+.d-bg {
+    left: 2%;
+    top: 3.88%;
+    width: 94.68%;
+    height: 93.18%;
+    object-fit: cover;
+}
+
+/* dante lineart */
+.d-lineart {
+    left: 2%;
+    top: 3.17%;
+    width: 96.23%;
+    height: 93.89%;
+    object-fit: cover;
+}
+
+/* dante colour overlay */
+.d-overlay {
+    left: 2%;
+    top: 3.17%;
+    width: 96.23%;
+    height: 93.77%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+}
+
+/* -------- Florence composition (right) -------- */
+
+.home-florence {
+    position: absolute;
+    left: 880px;
+    top: 195px;
+    width: 560px;
+    height: 856px;
+    z-index: 6;
+    overflow: hidden;
+}
+
+.home-florence > img,
+.home-florence > div {
+    position: absolute;
+    display: block;
+}
+
+/* florence background */
+.f-bg {
+    left: 0;
+    top: 3.97%;
+    width: 100.36%;
+    height: 96.96%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* florence colour overlay — overflow wrapper: inner image extends far left */
+.f-overlay-wrap {
+    left: 0;
+    top: 0.35%;
+    width: 100.36%;
+    height: 99.65%;
+    overflow: hidden;
+    mix-blend-mode: darken;
+    pointer-events: none;
+}
+
+.f-overlay {
+    position: absolute;
+    display: block;
+    left: -157.29%;
+    top: -12.08%;
+    width: 257.33%;
+    height: 113.27%;
+    max-width: none;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* florence lineart */
+.f-lineart {
+    left: 3.93%;
+    top: 0.58%;
+    width: 96.43%;
+    height: 99.53%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* -------- Clickable hit areas -------- */
+
+.home-link {
+    position: absolute;
+    display: block;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 5;
+}
+
+.home-link-inferno {
+    top: 217px;
+    left: 0;
+    width: 374px;
+    bottom: 2px;
+}
+
+.home-link-purgatorio {
+    top: 95px;
+    left: 366px;
+    width: 417px;
+    height: 597px;
+}
+
+.home-link-dante {
+    left: 528px;
+    top: 219px;
+    width: 451px;
+    height: 851px;
+}
+
+.home-link-florence {
+    left: 880px;
+    top: 195px;
+    width: 560px;
+    height: 856px;
+}
+
+.home-link-book {
+    left: 838px;
+    top: 362px;
+    width: 194px;
+    height: 196px;
+    /* sits entirely inside the larger dante/florence hit areas — raise it above
+       them so its (smaller, more specific) zone receives the hover first */
+    z-index: 6;
+}
+
+/* -------- Hover glow zones (inside .home-overlay) -------- */
+/* Each zone uses an overflow-hidden wrapper + offset image, matching Figma's exact clipping. */
+
+.home-hover {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 2;
+}
+
+.home-hover.is-visible { opacity: 1; }
+
+/* Shared inner-image rule */
+.home-hover .h-img {
+    position: absolute;
+    max-width: none;
+    pointer-events: none;
+}
+
+/* Inferno: wrapper at illus (−27, 213), clip 702×817, image offset (0, −267) */
+.home-hover-inferno { left: -27px; top: 213px; width: 702px; height: 817px; overflow: hidden; }
+.home-hover-inferno .h-img { left: 0; top: -267px; width: 1445px; height: 1084px; }
+
+/* Purgatorio: wrapper at illus (306, 171), clip 521×560, image offset (−425, −262) */
+/* Right edge capped at x=522 to avoid overlapping Dante (starts at x=528) */
+.home-hover-purgatorio { left: 306px; top: 171px; width: 216px; height: 560px; overflow: hidden; }
+.home-hover-purgatorio .h-img { left: -425px; top: -262px; width: 1815px; height: 1362px; }
+
+/* Florence: wrapper at illus (892, 198), clip 550×863, image offset (−939, −253) */
+.home-hover-florence { left: 892px; top: 198px; width: 550px; height: 863px; overflow: hidden; }
+.home-hover-florence .h-img { left: -939px; top: -253px; width: 1489px; height: 1116px; }
+
+/* Dante: container matches dante element (528, 219 / 451×851); sub-zones handle clipping */
+.home-hover-dante { left: 528px; top: 219px; width: 451px; height: 851px; }
+
+.d-outline-wrap {
+    position: absolute;
+    left: 5px; top: -1px; width: 447px; height: 827px;
+    overflow: hidden;
+    pointer-events: none;
+}
+.d-outline-img {
+    position: absolute;
+    left: -611px; top: -293px; width: 1538px; height: 1154px;
+    max-width: none; pointer-events: none;
+}
+
+.d-bookoverlay-wrap {
+    position: absolute;
+    left: 311px; top: 174px; width: 132px; height: 137px;
+    overflow: hidden;
+    mix-blend-mode: darken;
+    pointer-events: none;
+}
+.d-bookoverlay-img {
+    position: absolute;
+    left: -88px; top: -93px; width: 220px; height: 230px;
+    max-width: none; pointer-events: none;
+}
+
+/* Book: wrapper at illus (838, 362), clip 194×196, image offset (−941, −447) */
+.home-hover-book { left: 838px; top: 362px; width: 194px; height: 196px; overflow: hidden; }
+.home-hover-book .h-img { left: -941px; top: -447px; width: 1569px; height: 1180px; }
+
+/* -------- Bottom estrelita star (inside .home-overlay) -------- */
+/* top: 678 px = illustration y-coord (group offset already baked in) */
+
+.home-estrelita {
+    position: absolute;
+    left: 643px;
+    top: 678px;
+    width: 68px;
+    height: 71px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* ============================================================ */
+/* Shared Content Pages                                         */
+/* ============================================================ */
+
+.text-page {
+    position: relative;
+    min-height: 100vh;
+    z-index: 1;
+}
+
+.text-page-inner {
+    position: relative;
+    max-width: 1222px;
+    margin: 0 auto;
+    padding: 243px 17px 200px;
+    z-index: 2;
+}
+
+/* -------- Section separator (asterisk) -------- */
+
+.sep, .dark-sep {
+    font-family: var(--font-karolus);
+    font-size: 28px;
+    line-height: 1;
+    text-align: center;
+    margin: 33px 0;
+    position: relative;
+    z-index: 2;
+}
+.sep      { color: var(--clr-text-dark); }
+.dark-sep { color: var(--clr-text-light); }
+
+/* -------- Body paragraphs -------- */
+
+.para, .dark-para {
+    font-family: var(--font-body);
+    font-size: 20px;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 1188px;
+    margin: 0 auto 33px;
+    position: relative;
+    z-index: 2;
+}
+.para      { color: var(--clr-text-dark); }
+.dark-para { color: var(--clr-text-light); }
+
+/* -------- Poem / verse -------- */
+
+.poem, .dark-poem {
+    font-family: var(--font-body-sc);
+    font-size: 20px;
+    line-height: 1.6;
+    text-align: center;
+    white-space: pre-line;
+    margin: 0 auto 33px;
+    max-width: 900px;
+    font-style: italic;
+    position: relative;
+    z-index: 2;
+}
+.poem      { color: var(--clr-text-dark); }
+.dark-poem { color: var(--clr-text-light); }
+
+/* ============================================================ */
+/* Gothic Title (200 px, parchment pages)                       */
+/* ============================================================ */
+
+.title-gothic, .dark-title {
+    font-family: var(--font-gothic);
+    font-size: 200px;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 33px;
+    position: relative;
+    z-index: 2;
+}
+.title-gothic { color: var(--clr-title); }
+.dark-title   { color: var(--clr-text-light); }
+
+/* ============================================================ */
+/* Divine Comedy Page                                           */
+/* ============================================================ */
+
+.dc-sketch {
+    position: fixed;
+    left: 50%;
+    top: calc(50% - 290px);
+    transform: translateX(-50%);
+    width: 1416px;
+    height: 1898px;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
+}
+
+/* ============================================================ */
+/* Structure Page                                               */
+/* ============================================================ */
+
+.structure-virgil {
+    position: fixed;
+    right: -320px;
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1100px;
+    height: 1250px;
+    background-image: url('../img/virgil.png');
+    background-size: cover;
+    background-position: center;
+    background-color: #f7ebdc;
+    background-blend-mode: multiply;
+    mix-blend-mode: multiply;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.structure-watermark {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-family: var(--font-gothic);
+    font-size: 520px;
+    line-height: 1;
+    color: #8B0020;
+    text-align: center;
+    mix-blend-mode: soft-light;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.06;
+}
+
+.dot-star {
+    display: block;
+    width: 19px;
+    height: 19px;
+    margin: 35px auto;
+}
+
+/* ============================================================ */
+/* History Page                                                 */
+/* ============================================================ */
+
+.history-body .text-page-inner {
+    padding: 100px 120px 60px;
+}
+
+.history-book-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.history-title {
+    font-family: var(--font-karolus);
+    font-size: 200px;
+    line-height: 1;
+    color: var(--clr-crimson);
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 40px;
+    padding-top: 60px;
+}
+
+.history-subtitle {
+    font-family: var(--font-karolus);
+    font-size: 64px;
+    line-height: 1;
+    color: var(--clr-text-dark);
+    text-align: center;
+    font-weight: 700;
+    margin: 50px 0 30px;
+}
+
+/* -------- Early editions table -------- */
+
+.editions-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--clr-text-dark);
+    margin: 40px 0;
+}
+
+.editions-table th {
+    border-bottom: 2px solid var(--clr-text-dark);
+    padding: 8px 12px;
+    font-size: 20px;
+    text-align: left;
+    font-style: italic;
+}
+
+.editions-table td {
+    border-bottom: 1px solid rgba(36, 17, 17, 0.25);
+    padding: 8px 12px;
+    text-align: left;
+}
+
+/* ============================================================ */
+/* Thematic Concerns Page                                       */
+/* ============================================================ */
+
+.thematic-body {
+    background-color: #fff;
+}
+
+.thematic-body .text-page {
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
+}
+
+.thematic-body .text-page-inner {
+    padding-top: 120px;
+}
+
+.thematic-lucifero-wrap {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: multiply;
+    opacity: 0.22;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.thematic-lucifero-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.thematic-blur {
+    position: absolute;
+    inset: 0;
+    background: rgba(247, 235, 220, 0.2);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.thematic-hero {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 598px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
+
+.thematic-hero-spacer {
+    height: 598px;
+}
+
+.thematic-title {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-gothic);
+    font-size: 160px;
+    line-height: 1;
+    color: var(--clr-title);
+    text-align: center;
+    mix-blend-mode: hard-light;
+    pointer-events: none;
+}
+
+.thematic-title-inner {
+    padding: 10px;
+}
+
+.section-title-gothic {
+    font-family: var(--font-gothic);
+    font-size: 160px;
+    line-height: 1;
+    color: var(--clr-title);
+    text-align: center;
+    margin: 50px 0 20px;
+}
+
+/* ============================================================ */
+/* Dark Pages — Inferno / Purgatorio / Paradiso                 */
+/* ============================================================ */
+
+.inferno-body   { background-color: #241111; }
+
+/* -------- Inferno bg illustration -------- */
+
+.inferno-illus {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 646px;
+    height: 806px;
+    z-index: 0;
+    opacity: 0.2;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.inferno-illus img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.purgatorio-illus {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 522px;
+    height: 663px;
+    z-index: 0;
+    opacity: 0.18;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.purgatorio-illus img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.history-h-illus {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: auto;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.12;
+}
+
+.history-h-illus img {
+    height: 100%;
+    width: auto;
+    display: block;
+}
+
+.history-book-illus {
+    position: fixed;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 90vh;
+    width: auto;
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.1;
+}
+
+.history-book-illus img {
+    height: 100%;
+    width: auto;
+    display: block;
+}
+
+/* ============================================================ */
+/* Canticle Pages — Left-side vector background decoration     */
+/* ============================================================ */
+
+.canticle-vector-bg {
+    position: fixed;
+    left: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 680px;
+    height: auto;
+    opacity: 0.18;
+    mix-blend-mode: lighten;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ============================================================ */
+/* Purgatorio individual page — fundo escuro, texto claro      */
+/* ============================================================ */
+
+.purgatorio-body {
+    background-color: #1c1008;
+}
+
+.purgatorio-body .para,
+.purgatorio-body .sep,
+.purgatorio-body .poem,
+.purgatorio-body .title-gothic {
+    color: var(--clr-text-light);
+}
+
+/* ============================================================ */
+/* Criticism Page                                              */
+/* ============================================================ */
+
+.criticism-body {
+    background-color: #561514;
+}
+
+.criticism-inner {
+    padding-top: 605px;
+}
+
+.criticism-dore {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    mix-blend-mode: lighten;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+    object-fit: cover;
+}
+
+.criticism-watermark {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-family: var(--font-gothic);
+    font-size: 400px;
+    line-height: 1;
+    color: #8B0020;
+    text-align: center;
+    mix-blend-mode: lighten;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+/* ============================================================ */
+/* Popular Culture Page                                         */
+/* ============================================================ */
+
+.popular-body {
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Estrela tem cor escura — inverte para ficar visível em fundos escuros */
+.popular-body .star-home img,
+.canticles-body .star-home img,
+.inferno-body .star-home img,
+.purgatorio-body .star-home img {
+    filter: brightness(0) invert(1);
+    opacity: 0.75;
+}
+
+.popular-page {
+    position: fixed;
+    inset: 0;
+    background-color: var(--clr-text-dark);
+    overflow: hidden;
+    cursor: grab;
+}
+
+.popular-page:active {
+    cursor: grabbing;
+}
+
+/* Counter-translated wrapper — JS keeps this stationary as strip pans */
+.pop-fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.popular-bg-texture {
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background: url('../img/pop-bg.png') center / cover no-repeat;
+    opacity: 0.12;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+.popular-title-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.popular-title-line {
+    font-family: var(--font-gothic);
+    font-size: 500px;
+    line-height: 1;
+    color: rgba(180, 90, 80, 0.22);
+    text-align: center;
+    white-space: nowrap;
+    position: absolute;
+    width: 250%;
+    left: -75%;
+}
+
+.popular-title-line:nth-child(1) {
+    top: 51px;
+}
+
+.popular-title-line:nth-child(2) {
+    top: 544px;
+}
+
+/* -------- Scroll strip — JS-driven transform canvas -------- */
+
+.popular-scroll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2800px;
+    height: 100vh;
+    background-color: var(--clr-text-dark);
+    will-change: transform;
+    z-index: 1;
+}
+
+/* The Thinker */
+.pop-thinker {
+    position: absolute;
+    left: 67px;
+    top: 0;
+    width: 632px;
+    height: 100vh;
+    object-fit: cover;
+    object-position: top;
+    mix-blend-mode: luminosity;
+    filter: drop-shadow(12px 12px 12px rgba(0,0,0,0.4));
+}
+
+/* Fame */
+.pop-fame {
+    position: absolute;
+    left: 599px;
+    top: -21px;
+    width: 585px;
+    height: 585px;
+    object-fit: cover;
+    mix-blend-mode: luminosity;
+}
+
+/* Bouguereau — overflow-clipped with slight horizontal offset */
+.pop-bougerau {
+    position: absolute;
+    left: 789px;
+    top: 118px;
+    width: 205px;
+    height: 307px;
+    overflow: hidden;
+}
+
+.pop-bougerau img {
+    position: absolute;
+    left: -8.86%;
+    top: 0;
+    width: 120%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Art frame — centering wrapper positions it, inner img rotates */
+.pop-frame-wrap {
+    position: absolute;
+    left: 1134px;
+    top: 110px;
+    width: 585px;
+    height: 585px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.pop-frame {
+    width: 583px;
+    height: 583px;
+    object-fit: cover;
+    mix-blend-mode: luminosity;
+    transform: rotate(89.89deg);
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Gustave Doré engraving */
+.pop-dore {
+    position: absolute;
+    left: 1264px;
+    top: 299px;
+    width: 319px;
+    height: 218px;
+    object-fit: cover;
+}
+
+/* Music stand */
+.pop-stand {
+    position: absolute;
+    left: 1520px;
+    top: 155px;
+    width: 1081px;
+    height: 1081px;
+    object-fit: cover;
+    mix-blend-mode: luminosity;
+}
+
+/* Dante's Inferno book */
+.pop-book {
+    position: absolute;
+    left: 1700px;
+    top: -120px;
+    width: 780px;
+    height: 780px;
+    object-fit: contain;
+    object-position: center;
+    mix-blend-mode: luminosity;
+}
+
+/* ============================================================ */
+/* Hamburger toggle — hidden on desktop, shown on mobile        */
+/* ============================================================ */
+
+.nav-toggle {
+    display: none;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 110;
+    color: var(--clr-text-dark);
+}
+
+.nav-toggle .bar { display: none; }
+
+.nav-toggle::before {
+    content: '';
+    display: block;
+    width: 22px;
+    height: 22px;
+    background-color: currentColor;
+    -webkit-mask-image: url('../img/estrelita.svg');
+    mask-image: url('../img/estrelita.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s;
+}
+
+.nav-toggle.is-open::before { transform: rotate(72deg); }
+
+/* Canticles — fundo escuro, então a estrela do menu fica branca */
+.canticles-body .nav-toggle { color: var(--clr-text-light); }
+
+/* Paraíso tem fundo claro — volta à cor escura */
+.canticles-body.paradiso-active .nav-toggle { color: var(--clr-text-dark); }
+
+/* ============================================================ */
+/* RESPONSIVE                                                   */
+/*                                                              */
+/*   Big display    ≥ 1920 px                                   */
+/*   Desktop          (default — base design at ≈ 1440 px)      */
+/*   Tablet H       ≤ 1199 px  (≈ 1024 px landscape)           */
+/*   Mobile         ≤  767 px  (≈ 390 px)                      */
+/* ============================================================ */
+
+/* ============================================================ */
+/* Realm panels — canticle overlays                             */
+/* ============================================================ */
+
+/* Trigger arrow — fixed bottom-centre of home page */
+.realm-trigger {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 110;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--clr-text-dark);
+    opacity: 0.45;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.realm-trigger:hover { opacity: 0.85; transform: translateX(-50%) translateY(-4px); }
+.realm-trigger svg   { width: 100%; height: 100%; }
+
+/* Full-screen panels */
+.realm-panel {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-100%);
+    transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+    overflow: hidden;
+}
+
+.realm-panel.is-active { transform: translateY(0); }
+
+.realm-panel-inferno   { background: #1a0a0a; z-index: 151; }
+.realm-panel-purgatorio{ background: #1c1008; z-index: 152; }
+.realm-panel-paradiso  { background: var(--clr-parchment-s); z-index: 153; }
+
+/* Background illustration — faint, full bleed */
+.realm-illus {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.08;
+    pointer-events: none;
+    mix-blend-mode: luminosity;
+}
+
+.realm-panel-paradiso .realm-illus {
+    opacity: 0.12;
+    mix-blend-mode: multiply;
+}
+
+/* Paradiso — dark text on light parchment background */
+.realm-panel-paradiso .realm-content,
+.realm-panel-paradiso .realm-name {
+    color: var(--clr-text-dark);
+}
+
+.realm-panel-paradiso .realm-cta {
+    color: var(--clr-text-dark);
+    border-bottom-color: rgba(36, 17, 17, 0.3);
+}
+
+.realm-panel-paradiso .realm-cta:hover {
+    border-color: rgba(36, 17, 17, 0.7);
+}
+
+/* Central content */
+.realm-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--clr-text-light);
+    padding: 0 40px;
+    width: 100%;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.realm-eyebrow {
+    font-family: var(--font-body);
+    font-size: 18px;
+    letter-spacing: 0.25em;
+    opacity: 0.55;
+    text-align: center;
+    width: 100%;
+}
+
+.realm-name {
+    font-family: var(--font-gothic);
+    font-size: clamp(80px, 14vw, 200px);
+    line-height: 1;
+    color: var(--clr-text-light);
+    text-align: center;
+    width: 100%;
+}
+
+.realm-desc {
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 1.6;
+    opacity: 0.7;
+    max-width: 480px;
+}
+
+.realm-cta {
+    font-family: var(--font-body-sc);
+    font-size: 16px;
+    letter-spacing: 0.12em;
+    color: var(--clr-text-light);
+    opacity: 0.85;
+    border-bottom: 1px solid rgba(247, 235, 220, 0.35);
+    padding-bottom: 3px;
+    transition: opacity 0.2s, border-color 0.2s;
+}
+
+.realm-cta:hover { opacity: 1; border-color: rgba(247, 235, 220, 0.8); }
+
+/* Back arrow — bottom centre */
+.realm-back {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--clr-text-light);
+    opacity: 0.4;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+}
+
+.realm-back:hover { opacity: 0.85; transform: translateX(-50%) translateY(4px); }
+.realm-back svg   { width: 100%; height: 100%; }
+
+/* Next arrow — top right */
+.realm-next {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--clr-text-light);
+    opacity: 0.4;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+}
+
+.realm-next:hover { opacity: 0.85; transform: translateY(-4px); }
+.realm-next svg   { width: 100%; height: 100%; }
+
+/* ============================================================ */
+/* Canticles standalone page                                    */
+/* ============================================================ */
+
+/* Página das três canticles — scroll de 300vh revela cada painel */
+.canticles-body {
+    height: 300vh;
+}
+
+/* Panels are fixed layers — JS drives translateY based on scroll */
+.canticles-body .realm-panel {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    transition: none;
+    scroll-snap-align: none;
+}
+
+/* Inferno is always the bottom layer, visible from the start */
+.canticles-body #inferno     { transform: translateY(0); }
+.canticles-body #purgatorio,
+.canticles-body #paradiso    { transform: translateY(-100%); }
+
+/* Ilustrações vectoriais — esticadas para cobrir o painel inteiro */
+.canticles-body .realm-illus {
+    opacity: 0.22;
+    mix-blend-mode: screen;
+    object-fit: fill;
+}
+
+/* Inferno illustration — full bleed, screen so dark areas drop into the background */
+.canticles-body #inferno .realm-illus {
+    opacity: 0.3;
+    mix-blend-mode: screen;
+}
+
+/* Paraíso é claro — multiply revela os traços escuros no pergaminho */
+.canticles-body .realm-panel-paradiso .realm-illus {
+    opacity: 0.14;
+    mix-blend-mode: multiply;
+    object-fit: fill;
+    object-position: left bottom;
+}
+
+
+/* Paradiso activo — a estrela volta à cor original (fundo claro) */
+.canticles-body.paradiso-active .star-home img {
+    filter: none;
+    opacity: 1;
+}
+
+/* ============================================================ */
+/* Realm nav cards — bottom of Structure & Story page           */
+/* ============================================================ */
+
+.realm-star {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 60px auto 80px;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.4s ease;
+}
+
+.realm-star img {
+    width: 100%;
+    height: 100%;
+}
+
+.realm-star:hover {
+    transform: rotate(72deg) scale(1.2);
+    filter: drop-shadow(0 0 18px rgba(247, 235, 180, 0.9))
+            drop-shadow(0 0 40px rgba(220, 180, 60, 0.6));
+}
+
+.realm-nav {
+    display: flex;
+    width: 100%;
+    min-height: 620px;
+}
+
+.realm-nav-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: flex 0.45s cubic-bezier(0.76, 0, 0.24, 1),
+                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.4s ease;
+}
+
+.realm-nav-card:hover { flex: 1.8; }
+
+.realm-nav-inferno    { background: #2a0c0c; }
+.realm-nav-purgatorio { background: #2a1a06; }
+.realm-nav-paradiso   { background: #0c0c1e; }
+
+.realm-nav-inferno:hover {
+    transform: rotate(-3deg) scale(1.03);
+    box-shadow: 0 0 80px rgba(220, 40, 10, 0.55), inset 0 0 60px rgba(180, 20, 0, 0.25);
+    z-index: 2;
+}
+.realm-nav-purgatorio:hover {
+    transform: rotate(3deg) scale(1.03);
+    box-shadow: 0 0 80px rgba(200, 120, 20, 0.5), inset 0 0 60px rgba(160, 90, 0, 0.2);
+    z-index: 2;
+}
+.realm-nav-paradiso:hover {
+    transform: rotate(-3deg) scale(1.03);
+    box-shadow: 0 0 80px rgba(80, 80, 220, 0.5), inset 0 0 60px rgba(40, 40, 180, 0.2);
+    z-index: 2;
+}
+
+.realm-nav-num {
+    font-family: var(--font-karolus);
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--clr-text-light);
+    opacity: 0.65;
+    margin-bottom: 16px;
+}
+
+.realm-nav-title {
+    font-family: var(--font-gothic);
+    font-size: clamp(52px, 6vw, 100px);
+    line-height: 1;
+    color: var(--clr-text-light);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.realm-nav-desc {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--clr-text-light);
+    opacity: 0.75;
+    max-width: 240px;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.realm-nav-cta {
+    font-family: var(--font-body-sc);
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    color: var(--clr-text-light);
+    opacity: 0.85;
+    border-bottom: 1px solid rgba(247, 235, 220, 0.4);
+    padding-bottom: 3px;
+    transition: opacity 0.2s, border-color 0.2s;
+}
+
+.realm-nav-card:hover .realm-nav-cta {
+    opacity: 1;
+    border-color: rgba(247, 235, 220, 0.9);
+}
+
+/* ============================================================ */
+/* BIG DISPLAY  ≥ 1920 px   (scale ≈ ×1.333 vs 1440 px base)  */
+/* ============================================================ */
+
+@media (min-width: 1920px) {
+
+    /* --- Nav --- */
+    .nav            { height: 128px; }
+    .nav-logo       { left: 95px; top: 40px; width: 373px; }
+    .nav-links      { right: 83px; top: 26px; grid-template-columns: repeat(3, 207px); width: 621px; height: 76px; font-size: 21px; gap: 8px 0; }
+    .nav-links a    { line-height: 36px; }
+    .star-home      { top: 80px; left: 55px; width: 39px; height: 39px; }
+
+    /* --- Titles --- */
+    .title-gothic        { font-size: 267px; }
+    .dark-title          { font-size: 267px; }
+    .history-title       { font-size: 267px; }
+    .history-subtitle    { font-size: 85px; }
+    .thematic-title          { font-size: 213px; }
+    .section-title-gothic{ font-size: 213px; }
+    .structure-watermark { font-size: 693px; letter-spacing: -0.02em; top: 0; }
+    .criticism-watermark { font-size: 533px; top: 0; }
+    .popular-title-line  { font-size: 533px; }
+    .popular-title-line:nth-child(2) { top: 573px; }
+
+    /* --- Text page layout --- */
+    .text-page-inner { max-width: 1600px; padding: 324px 17px 267px; }
+
+    /* --- Page decorations --- */
+    .dc-sketch           { width: 1888px; height: 2531px; top: calc(50% - 387px); }
+    .structure-virgil    { left: 391px; top: 67px; width: 1980px; height: 2140px; }
+    .thematic-hero           { height: 797px; }
+    .thematic-hero-spacer    { height: 797px; }
+    .inferno-illus       { width: 861px; height: 1074px; }
+    .purgatorio-illus    { width: 696px; height: 884px; }
+    .criticism-inner     { padding-top: 840px; }
+    .popular-scroll      { width: 4500px; }
+}
+
+/* ============================================================ */
+/* TABLET HORIZONTAL  ≤ 1199 px  (scale ≈ ×0.711 vs 1440 px) */
+/* ============================================================ */
+
+@media (max-width: 1199px) {
+
+    /* --- Nav --- */
+    .nav            { height: 72px; }
+    .nav-logo       { left: 30px; top: 18px; width: 200px; height: 28px; }
+    .nav-links      { right: 20px; top: 15px; grid-template-columns: repeat(3, 115px); width: 345px; height: 43px; font-size: 13px; gap: 6px 0; }
+    .nav-links a    { line-height: 20px; }
+    .star-home      { top: 40px; left: 20px; width: 22px; height: 22px; }
+
+    /* --- Titles --- */
+    .title-gothic        { font-size: 130px; }
+    .dark-title          { font-size: 130px; }
+    .history-title       { font-size: 130px; }
+    .history-subtitle    { font-size: 45px; }
+    .thematic-title          { font-size: 110px; }
+    .section-title-gothic{ font-size: 110px; }
+    .structure-watermark { font-size: 370px; letter-spacing: -0.02em; top: 0; }
+    .criticism-watermark { font-size: 285px; top: 0; }
+    .popular-title-line  { font-size: 285px; }
+    .popular-title-line:nth-child(2) { top: 306px; }
+
+    /* --- Text + body copy --- */
+    .text-page-inner { padding: 180px 30px 150px; }
+    .para            { font-size: 18px; }
+    .dark-para       { font-size: 18px; }
+    .poem            { font-size: 18px; }
+    .dark-poem       { font-size: 18px; }
+
+    /* --- Page decorations (×0.711) --- */
+    .dc-sketch           { width: 1007px; height: 1350px; top: calc(50% - 206px); }
+    .structure-virgil    { left: 208px; top: 36px; width: 1056px; height: 1141px; }
+    .thematic-hero           { height: 425px; }
+    .thematic-hero-spacer    { height: 425px; }
+    .inferno-illus       { width: 459px; height: 573px; }
+    .purgatorio-illus    { width: 371px; height: 471px; }
+    .criticism-inner     { padding-top: 450px; }
+    .popular-scroll      { padding: 60px 60px 140px; gap: 40px; }
+}
+
+/* ============================================================ */
+/* MOBILE  ≤ 767 px                                             */
+/* ============================================================ */
+
+@media (max-width: 767px) {
+
+    /* --- Home splash title --- */
+    .home-splash-divine,
+    .home-splash-comedy {
+        font-size: clamp(52px, 18vw, 130px);
+    }
+
+    /* --- Nav: fixed top, always visible --- */
+    .nav {
+        top: 0;
+        bottom: auto;
+        height: 56px;
+        overflow: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .nav-logo {
+        position: absolute;
+        left: 16px;
+        top: 14px;
+        width: 130px;
+        height: 26px;
+    }
+
+    /* Full-screen overlay panel (closed by default) */
+    .nav-links {
+        position: fixed;
+        top: 56px;
+        left: 0;
+        right: 0;
+        height: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        background: rgba(247, 235, 220, 0.97);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        opacity: 0;
+        transition: height 0.35s ease, opacity 0.35s ease;
+        /* reset grid */
+        grid-template-columns: none;
+        grid-template-rows: none;
+        width: 100%;
+        z-index: 200;
+    }
+
+    .nav-links.is-open {
+        height: calc(100vh - 56px);
+        opacity: 1;
+    }
+
+    .nav-links a {
+        font-size: 26px;
+        line-height: 1.4;
+        display: block;
+        text-align: center;
+    }
+
+    .nav-toggle { display: block; }
+
+    /* Hide star home (nav is always visible on mobile) */
+    .star-home { display: none; }
+
+    /* Illustration: phones ≤430px get their own composition (see dedicated  */
+    /* breakpoint below); 431-767px inherit the scaled 1440x1080 frame —      */
+    /* the bespoke layout's fixed-pixel offsets get too sparse past ~430px.   */
+
+    /* --- Titles --- */
+    .title-gothic        { font-size: 58px; margin-bottom: 20px; }
+    .dark-title          { font-size: 58px; margin-bottom: 20px; }
+    .history-title       { font-size: 58px; padding-top: 16px; }
+    .history-subtitle    { font-size: 28px; margin: 30px 0 16px; }
+    .thematic-title          { font-size: 46px; }
+    .section-title-gothic{ font-size: 46px; margin: 30px 0 12px; }
+    .structure-watermark { font-size: 110px; letter-spacing: -0.02em; top: 0; }
+    .criticism-watermark { font-size: 110px; top: 0; }
+    .popular-title-line  { font-size: 120px; }
+    .popular-title-bg    { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .popular-title-line  { position: static; width: 100%; }
+    .popular-title-line:nth-child(1) { top: auto; }
+    .popular-title-line:nth-child(2) { top: auto; }
+
+    /* --- Text layout --- */
+    .text-page-inner { padding: 96px 20px 100px; }
+    .para            { font-size: 16px; max-width: 100%; margin-bottom: 24px; }
+    .dark-para       { font-size: 16px; max-width: 100%; margin-bottom: 24px; }
+    .poem            { font-size: 16px; max-width: 100%; margin-bottom: 24px; }
+    .dark-poem       { font-size: 16px; max-width: 100%; margin-bottom: 24px; }
+    .sep             { margin: 20px 0; }
+    .dark-sep        { margin: 20px 0; }
+
+    /* --- Page decorations --- */
+    .dc-sketch           { width: 380px; height: 510px; top: calc(50% - 80px); }
+    .structure-virgil    { left: 0; top: 20px; width: 320px; height: 346px; }
+    .thematic-hero           { height: 200px; }
+    .thematic-hero-spacer    { height: 200px; }
+    .inferno-illus       { width: 200px; height: 250px; opacity: 0.15; }
+    .purgatorio-illus    { width: 180px; height: 228px; opacity: 0.15; }
+    .criticism-inner     { padding-top: 20px; }
+    .criticism-watermark {
+        position: relative;
+        top: auto;
+        font-size: 80px;
+        mix-blend-mode: normal;
+        opacity: 1;
+        color: var(--clr-text-light);
+        padding: 80px 20px 20px;
+        white-space: normal;
+    }
+
+    /* --- Popular Culture: smaller items, keep horizontal scroll --- */
+    .popular-scroll { width: 3200px; }
+
+    /* --- History editions table: horizontal scroll on small screens --- */
+    .editions-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 14px;
+    }
+
+    /* --- Realm nav cards: stack vertically on mobile --- */
+    .realm-nav { flex-direction: column; min-height: auto; }
+    .realm-nav-card { min-height: auto; flex: none; padding: 48px 32px; }
+    .realm-nav-card:hover { flex: none; }
+    .realm-nav-title { font-size: 56px; }
+}
+
+/* ============================================================ */
+/* SMALL PHONES  ≤ 430 px — bespoke home illustration layout    */
+/* The shared 1440x1080 frame's fixed offsets get too sparse on */
+/* narrow screens, so small phones get their own composition,   */
+/* with each piece individually placed and sized.               */
+/* ============================================================ */
+@media (max-width: 430px) {
+
+    .home-illus-group,
+    .home-overlay {
+        width: 100%;
+        height: auto;
+        left: 0;
+        top: 60px;
+        bottom: 0;
+        transform: none;
+    }
+
+    /* --- Home: simplified, centred on Dante --- */
+    .home-stars     { left: -15px; top: -45px; width: 320px; height: 240px; }
+    .home-ground    { bottom: 0; height: 260px; }
+
+    /* Inferno: left bleed, anchored to bottom area */
+    .home-inferno   { left: -80px; bottom: 0; top: auto; width: 300px; height: 420px; }
+
+    /* Purgatorio: background, nudged left of centre */
+    .home-purgatorio {
+        left: 38%;
+        transform: translateX(-50%);
+        top: 30px;
+        width: 270px;
+        height: 360px;
+    }
+
+    /* Grass */
+    .home-relva {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 120px;
+        top: auto;
+        width: 210px;
+        height: 340px;
+    }
+
+    /* Dante: centred, anchored to near-bottom so feet meet the ground */
+    .home-dante {
+        left: 50%;
+        transform: translateX(-50%);
+        top: auto;
+        bottom: 48px;
+        width: 280px;
+        height: 580px;
+    }
+
+    /* Florence: right bleed, anchored to bottom area */
+    .home-florence  { left: auto; right: -60px; bottom: 0; top: auto; width: 230px; height: 370px; }
+
+    /* Hit-area links: repositioned to match the bespoke mobile illustration layout. */
+    .home-link-dante {
+        left: 50%;
+        transform: translateX(-50%);
+        top: auto;
+        bottom: 48px;
+        width: 280px;
+        height: 580px;
+    }
+    .home-link-inferno {
+        left: 0;
+        bottom: 60px;
+        top: auto;
+        width: 130px;
+        height: 420px;
+        z-index: 7;
+    }
+    .home-link-purgatorio {
+        left: 38%;
+        transform: translateX(-50%);
+        top: 30px;
+        width: 270px;
+        height: 360px;
+    }
+    .home-link-florence {
+        left: auto;
+        right: 0;
+        top: auto;
+        bottom: 60px;
+        width: 130px;
+        height: 370px;
+    }
+    /* Book is inside the Florence/Dante overlap on desktop — no clear position on mobile */
+    .home-link-book { display: none; }
+
+    /* Hover glow images are sized for the 1440px frame — hide them on mobile */
+    .home-hover { display: none; }
+}

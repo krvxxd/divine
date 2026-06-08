@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dante's Divine Comedy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=IM+Fell+DW+Pica+SC&family=IM+Fell+English&family=UnifrakturMaguntia&display=swap" />
+    <link rel="icon" href="img/estrelita.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <!-- ============================================================ -->
+    <!-- Home Splash — Dark title card                               -->
+    <!-- ============================================================ -->
+
+    <section class="home-splash" aria-label="Divine Comedy">
+        <!-- Background — fixed layer behind everything -->
+        <div class="home-splash-bg">
+            <img src="img/home-splash-bg.png" alt="" />
+        </div>
+        <!-- Dante — sticky, above bg -->
+        <div class="home-splash-dante">
+            <img src="img/home-splash-dante.png" alt="" />
+        </div>
+        <!-- Title — scrolls away after 100vh, above dante -->
+        <div class="home-splash-foreground">
+            <div class="home-splash-title" aria-hidden="true">
+                <span class="home-splash-divine">Divine</span>
+                <span class="home-splash-comedy">Comedy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Home — Full-viewport illustration                             -->
+    <!-- ============================================================ -->
+
+    <div class="home">
+
+        <!-- Parchment colour base -->
+        <div class="home-parchment"></div>
+
+        <!-- Rotating manuscript texture -->
+        <div class="home-texture"></div>
+
+        <!-- -------- Illustration group — darken blend against parchment -------- -->
+
+        <div class="home-illus-group">
+
+            <!-- Stars left (behind everything) -->
+            <img class="home-stars" src="img/stars.png" alt="" />
+
+            <!-- Stars right — rotated instance, upper-right area -->
+            <img class="home-stars-right" src="img/stars.png" alt="" />
+
+            <!-- Ground plane -->
+            <img class="home-ground" src="img/home-bg-main.png" alt="" />
+
+            <!-- Grass (below purgatorio and inferno) -->
+            <img class="home-relva" src="img/relva.png" alt="" />
+
+            <!-- Purgatorio mountain (below inferno in overlap zone) -->
+            <div class="home-purgatorio">
+                <img class="p-lineart1" src="img/purgatorio-lineart1.png"  alt="" />
+                <div class="p-oberlay-wrap">
+                    <img class="p-oberlay" src="img/purgatorio-oberlay.png" alt="" />
+                </div>
+                <div class="p-lineart2-wrap">
+                    <img class="p-lineart2" src="img/purgatorio-lineart2.png" alt="" />
+                </div>
+                <img class="p-people"   src="img/purgatorio-bg-people.png" alt="" />
+                <img class="p-details"  src="img/purgatorio-details.png"   alt="" />
+                <img class="p-adao"     src="img/adao-eva.png"             alt="" />
+            </div>
+
+            <!-- Inferno composition (above purgatorio in overlap zone) -->
+            <div class="home-inferno">
+                <img class="i-bg"             src="img/inferno-bg.png"            alt="" />
+                <img class="i-shadow"         src="img/inferno-shadow.png"        alt="" />
+                <img class="i-rocks"          src="img/inferno-rocks.png"         alt="" />
+                <div class="i-details-wrap">
+                    <img class="i-details"    src="img/inferno-rocks-details.png" alt="" />
+                </div>
+                <img class="i-overlay"        src="img/inferno-rocks-overlay.png" alt="" />
+                <img class="i-demons-bg"      src="img/demons-bg.png"             alt="" />
+                <img class="i-demons-outline" src="img/demons-outline.png"        alt="" />
+                <div class="i-wall-wrap">
+                    <img class="i-wall"       src="img/wall-overlay.png"          alt="" />
+                </div>
+            </div>
+
+            <!-- Florence skyline -->
+            <div class="home-florence">
+                <img class="f-bg"      src="img/florence-bg.png"      alt="Florence" />
+                <div class="f-overlay-wrap">
+                    <img class="f-overlay" src="img/florence-overlay.png" alt="" />
+                </div>
+                <img class="f-lineart" src="img/florence-lineart.png" alt="" />
+            </div>
+
+            <!-- Dante figure (topmost) -->
+            <div class="home-dante">
+                <img class="d-bg"      src="img/dante-bg.png"      alt="Dante Alighieri" />
+                <img class="d-lineart" src="img/dante-lineart.png" alt="" />
+                <img class="d-overlay" src="img/dante-overlay.png" alt="" />
+            </div>
+
+        </div><!-- /.home-illus-group -->
+
+        <!-- ====================================================== -->
+        <!-- Overlay — identical 1440 px centred container as        -->
+        <!-- the illustration group; all interaction lives here      -->
+        <!-- ====================================================== -->
+
+        <div class="home-overlay">
+
+            <!-- Hit-area links -->
+            <a class="home-link home-link-inferno"    href="criticism.html"         aria-label="Criticism"></a>
+            <a class="home-link home-link-purgatorio" href="popular-culture.html"   aria-label="Popular Culture"></a>
+            <a class="home-link home-link-book"       href="history.html"           aria-label="History"></a>
+            <a class="home-link home-link-dante"      href="structure.html"         aria-label="Structure &amp; Story"></a>
+            <a class="home-link home-link-florence"   href="thematic-concerns.html" aria-label="Thematic Concerns"></a>
+
+            <!-- Hover glow zones (zone-clipped, toggled by JS) -->
+            <div class="home-hover home-hover-inferno">
+                <img class="h-img" src="img/inferno-hoover.png" alt="" />
+            </div>
+            <div class="home-hover home-hover-purgatorio">
+                <img class="h-img" src="img/purgatorio-hoover.png" alt="" />
+            </div>
+            <div class="home-hover home-hover-dante">
+                <div class="d-outline-wrap">
+                    <img class="d-outline-img" src="img/dante-outline.png" alt="" />
+                </div>
+                <div class="d-bookoverlay-wrap">
+                    <img class="d-bookoverlay-img" src="img/book-overlay-hoover.png" alt="" />
+                </div>
+            </div>
+            <div class="home-hover home-hover-florence">
+                <img class="h-img" src="img/florence-hoover.png" alt="" />
+            </div>
+            <div class="home-hover home-hover-book">
+                <img class="h-img" src="img/book-hoover.png" alt="" />
+            </div>
+
+        </div><!-- /.home-overlay -->
+
+    </div><!-- /.home -->
+
+    <!-- ============================================================ -->
+    <!-- Divine Comedy scroll section — slides over the illustration  -->
+    <!-- ============================================================ -->
+
+    <section class="home-divine-scroll">
+        <div class="home-divine-inner">
+            <h1 class="title-gothic">Divine Comedy</h1>
+            <p class="sep">*</p>
+            <p class="para">
+                The Divine Comedy (<em>Italian: Divina Commedia</em>) is an Italian narrative poem by Dante Alighieri,
+                begun c. 1308 and completed c. 1321, shortly before the author's death. It is widely considered the
+                pre-eminent work in Italian literature and one of the greatest works of Western literature. The poem's
+                imaginative vision of the afterlife is representative of the medieval worldview as it existed in the
+                Western Church by the 14th century. It is divided into three parts: Inferno, Purgatorio, and Paradiso.
+            </p>
+            <p class="para">
+                The poem explores the condition of the soul following death and portrays a vision of divine justice,
+                in which individuals receive appropriate punishment or reward based on their actions. Allegorically,
+                the poem represents the soul's journey towards God, beginning with the recognition and rejection of
+                sin (Inferno), followed by the penitent Christian life (Purgatorio), then the soul's ascent to God
+                (Paradiso). Dante draws on medieval Catholic theology and philosophy, especially Thomistic philosophy
+                derived from the <em>Summa Theologica</em> of Thomas Aquinas.
+            </p>
+            <p class="para">
+                In the poem, the pilgrim Dante is accompanied by three guides: Virgil, who represents human reason
+                and guides him through Inferno and most of Purgatorio; Beatrice, who represents divine revelation,
+                theology, grace, and faith, guiding him from the end of Purgatorio onwards; and Saint Bernard of
+                Clairvaux, who represents contemplative mysticism and guides him in the final cantos of Paradiso.
+            </p>
+            <p class="sep">*</p>
+        </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!-- Realm panels — slide in from top on trigger / next click     -->
+    <!-- ============================================================ -->
+
+    <div class="realm-panel realm-panel-inferno" data-realm="inferno" aria-hidden="true">
+        <img class="realm-illus" src="img/inferno-bg.png" alt="" loading="lazy" />
+        <div class="realm-content">
+            <p class="realm-eyebrow">I</p>
+            <h2 class="realm-name">Inferno</h2>
+            <p class="realm-desc">Nine circles of eternal punishment, descending to the centre of the earth.</p>
+            <a class="realm-cta" href="inferno.html">Descend</a>
+        </div>
+        <button class="realm-back" aria-label="Return">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        <button class="realm-next" aria-label="Ascend to Purgatorio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+        </button>
+    </div>
+
+    <div class="realm-panel realm-panel-purgatorio" data-realm="purgatorio" aria-hidden="true">
+        <img class="realm-illus" src="img/purgatorio-lineart1.png" alt="" loading="lazy" />
+        <div class="realm-content">
+            <p class="realm-eyebrow">II</p>
+            <h2 class="realm-name">Purgatorio</h2>
+            <p class="realm-desc">A mountain of purification rising from the southern sea toward the stars.</p>
+            <a class="realm-cta" href="purgatorio.html">Ascend</a>
+        </div>
+        <button class="realm-back" aria-label="Return">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        <button class="realm-next" aria-label="Ascend to Paradiso">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+        </button>
+    </div>
+
+    <div class="realm-panel realm-panel-paradiso" data-realm="paradiso" aria-hidden="true">
+        <img class="realm-illus" src="img/stars.png" alt="" loading="lazy" />
+        <div class="realm-content">
+            <p class="realm-eyebrow">III</p>
+            <h2 class="realm-name">Paradiso</h2>
+            <p class="realm-desc">The celestial spheres of light, ascending to the Empyrean beyond the stars.</p>
+            <a class="realm-cta" href="paradiso.html">Transcend</a>
+        </div>
+        <button class="realm-back" aria-label="Return">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- Navigation                                                    -->
+    <!-- ============================================================ -->
+
+    <nav class="nav" aria-label="Site navigation">
+        <a href="index.html">
+            <img class="nav-logo" src="img/nav-logo.png" alt="Divina Commedia" />
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="history.html">History</a>
+            <a href="structure.html">Structure &amp; Story</a>
+            <a href="thematic-concerns.html">Thematic Concerns</a>
+            <a href="criticism.html">Criticism</a>
+            <a href="popular-culture.html">Popular Culture</a>
+        </div>
+        <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </nav>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

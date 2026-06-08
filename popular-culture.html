@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>In Popular Culture — Dante's Divine Comedy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=IM+Fell+DW+Pica+SC&family=IM+Fell+English&family=UnifrakturMaguntia&display=swap" />
+    <link rel="icon" href="img/estrelita.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="popular-body">
+
+    <!-- ============================================================ -->
+    <!-- In Popular Culture — horizontal-scroll gallery               -->
+    <!-- ============================================================ -->
+
+    <main>
+    <div class="popular-page">
+
+        <!-- Star / home link -->
+        <a class="star-home" href="index.html" aria-label="Home">
+            <img src="img/estrelita.svg" alt=""/>
+        </a>
+
+        <!-- Horizontal scroll strip -->
+        <div class="popular-scroll">
+
+            <!-- Background layers — counter-translated by JS to stay fixed -->
+            <div class="pop-fixed">
+                <div class="popular-bg-texture"></div>
+                <div class="popular-title-bg" aria-hidden="true">
+                    <p class="popular-title-line">In Popular</p>
+                    <p class="popular-title-line">Culture</p>
+                </div>
+            </div>
+
+            <!-- The Thinker -->
+            <img class="pop-thinker" src="img/pop-thinker.png" alt="Rodin's The Thinker" />
+
+            <!-- Fame + Bougerau overlay -->
+            <img class="pop-fame" src="img/pop-fame.png" alt="" />
+            <div class="pop-bougerau">
+                <img src="img/pop-bougerau.png" alt="Bouguereau painting" />
+            </div>
+
+            <!-- Doré behind, frame in front (frame has transparent center) -->
+            <img class="pop-dore" src="img/pop-dore.png" alt="Gustave Doré engraving" />
+            <div class="pop-frame-wrap">
+                <img class="pop-frame" src="img/pop-frame.png" alt="" />
+            </div>
+
+            <!-- Music stand + book -->
+            <img class="pop-stand" src="img/pop-stand.png" alt="Music stand" />
+            <img class="pop-book" src="img/dantes-inferno-book.png" alt="Dante's Inferno book" />
+
+        </div>
+
+    </div>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- Navigation                                                    -->
+    <!-- ============================================================ -->
+
+    <nav class="nav" aria-label="Site navigation">
+        <a href="index.html">
+            <img class="nav-logo" src="img/nav-logo.png" alt="Divina Commedia" />
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="history.html">History</a>
+            <a href="structure.html">Structure &amp; Story</a>
+            <a href="thematic-concerns.html">Thematic Concerns</a>
+            <a href="criticism.html">Criticism</a>
+            <a href="popular-culture.html">Popular Culture</a>
+        </div>
+        <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </nav>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
